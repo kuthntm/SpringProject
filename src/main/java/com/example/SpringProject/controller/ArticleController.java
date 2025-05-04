@@ -4,17 +4,16 @@ import com.example.SpringProject.dto.ArticleForm;
 import com.example.SpringProject.entity.Article;
 import com.example.SpringProject.repository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Slf4j // 로깅 기능을 위한 어노테이션
 @Controller
 public class ArticleController {
-    private static final Logger log = LoggerFactory.getLogger(ArticleController.class);
     @Autowired // 스프링 부트가 미리 생성해 놓은 리파지터리 객체 주입
     private ArticleRepository articleRepository;
     @GetMapping("/articles/new")
@@ -35,5 +34,16 @@ public class ArticleController {
         log.info(saved.toString());
         //System.out.println(saved.toString());
         return "";
+    }
+
+    @GetMapping("/articles/{id}") // 데이터 조회 요청 접수
+    public String show(@PathVariable Long id, Model model){ // 매개변수로 id 받아 오기
+        log.info("id = " + id);
+        // 1. id를 조회해 데이터 가져오기
+        Article articleEntity = articleRepository.findById(id).orElse(null);
+        // 2. 모델에 데이터 등록하기
+        model.addAttribute("article", articleEntity);
+        // 3. 뷰 페이지 반환하기
+        return "articles/show";
     }
 }
