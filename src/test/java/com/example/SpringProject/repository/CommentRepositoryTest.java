@@ -57,7 +57,7 @@ class CommentRepositoryTest {
             // 2. 실제 데이터
             List<Comment> comments = commentRepository.findByNickName(nickname);
             // 3. 예상 데이터
-            Comment a = new Comment(1gL, new Article(4L, "영화 추천", "댓글 부탁"), nickname, "아이언맨");
+            Comment a = new Comment(1L, new Article(4L, "영화 추천", "댓글 부탁"), nickname, "아이언맨");
             Comment b = new Comment(4L, new Article(5L, "음식 추천", "댓글 달아주세요"), nickname, "치킨");
             Comment c = new Comment(7L, new Article(6L, "취미 추천", "부탁드립니다"), nickname, "게임");
             List<Comment> expected = Arrays.asList(a, b, c);
