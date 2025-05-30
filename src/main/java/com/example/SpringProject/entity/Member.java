@@ -17,4 +17,13 @@ public class Member {
     private String email;
     @Column
     private String password;
+
+    public void patch(Member member) {
+        if (member.getEmail() != null) {
+            this.email = member.getEmail();
+        }
+        if (member.getPassword() != null) {
+            this.password = member.getPassword();
+        }
+    }
 }

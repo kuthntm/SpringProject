@@ -3,6 +3,8 @@ package com.example.SpringProject.dto;
 
 import com.example.SpringProject.entity.Member;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 @AllArgsConstructor
 public class MemberForm {
