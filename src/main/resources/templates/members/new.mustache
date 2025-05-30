@@ -1,5 +1,4 @@
 {{>layouts/header}}
-
 <form class="container" action="/join" method="post">
     <div class="mb-3">
         <label class="form-label">이메일</label>
@@ -7,7 +6,11 @@
     </div>
     <div class="mb-3">
         <label class="form-label">비밀번호</label>
-        <input type="password" class="form-control" name="password">
+        <input type="password" class="form-control" name="password1">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">비밀번호 확인</label>
+        <input type="password" class="form-control" name="password2">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
     <a href="/members">Back</a>

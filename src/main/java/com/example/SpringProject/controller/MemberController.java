@@ -27,9 +27,18 @@ public class MemberController {
     }
 
     @PostMapping("/join")
-    public String join(MemberForm form){
+    public String join(MemberForm form, RedirectAttributes rttr){
+        try {
+            memberService.join(form);
+            return "redirect:/members";
+        } catch (IllegalArgumentException e) {
+            rttr.addFlashAttribute("msg", "비밀번호가 일치하지 않습니다.");
+            return "redirect:/signup";
+        }
+        /*
         Member saved = memberService.join(form);
         return "redirect:/members/" + saved.getId();
+        */
     }
 
     @GetMapping("/members/{id}")

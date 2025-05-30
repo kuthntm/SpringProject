@@ -18,10 +18,11 @@ public class MemberService {
     PasswordEncoder passwordEncoder;
 
     public Member join(MemberForm form){
+        if (!form.isPasswordMatch()) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
         Member member = form.toEntity();
-        System.out.println("Before encode: " + member.getPassword());
         String encodedPassword = passwordEncoder.encode(member.getPassword());
-        System.out.println("Encoded password: " + encodedPassword);
         member.setPassword(encodedPassword);
         return memberRepository.save(member);
     }
