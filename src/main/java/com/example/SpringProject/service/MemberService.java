@@ -5,6 +5,7 @@ import com.example.SpringProject.entity.Article;
 import com.example.SpringProject.entity.Member;
 import com.example.SpringProject.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,9 +14,15 @@ import java.util.List;
 public class MemberService {
     @Autowired
     MemberRepository memberRepository;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     public Member join(MemberForm form){
         Member member = form.toEntity();
+        System.out.println("Before encode: " + member.getPassword());
+        String encodedPassword = passwordEncoder.encode(member.getPassword());
+        System.out.println("Encoded password: " + encodedPassword);
+        member.setPassword(encodedPassword);
         return memberRepository.save(member);
     }
 
