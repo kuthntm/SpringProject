@@ -7,6 +7,7 @@ import com.example.SpringProject.entity.Member;
 import com.example.SpringProject.repository.MemberRepository;
 import com.example.SpringProject.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +34,9 @@ public class MemberController {
             return "redirect:/members";
         } catch (IllegalArgumentException e) {
             rttr.addFlashAttribute("msg", "비밀번호가 일치하지 않습니다.");
+            return "redirect:/signup";
+        } catch (DataIntegrityViolationException e) {
+            rttr.addFlashAttribute("msg", "이미 등록된 회원입니다.");
             return "redirect:/signup";
         }
         /*

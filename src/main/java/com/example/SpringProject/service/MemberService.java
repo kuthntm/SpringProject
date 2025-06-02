@@ -19,7 +19,7 @@ public class MemberService {
 
     public Member join(MemberForm form){
         if (!form.isPasswordMatch()) {
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+            throw new IllegalArgumentException("password.mismatch");
         }
         Member member = form.toEntity();
         String encodedPassword = passwordEncoder.encode(member.getPassword());
