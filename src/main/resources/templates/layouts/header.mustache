@@ -42,7 +42,16 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/signup">회원가입</a>
-                </li>
+                {{#isLoggedIn}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">로그아웃</a>
+                    </li>
+                {{/isLoggedIn}}
+                {{^isLoggedIn}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/members/login">로그인</a>
+                    </li>
+                {{/isLoggedIn}}
             </ul>
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

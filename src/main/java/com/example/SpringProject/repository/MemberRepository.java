@@ -7,4 +7,5 @@ import javax.swing.text.html.Option;
 import java.util.Optional;
 
 public interface MemberRepository extends CrudRepository<Member, Long> {
+    Optional<Member> findByEmail(String email);
 }
