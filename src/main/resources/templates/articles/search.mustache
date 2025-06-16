@@ -1,0 +1,28 @@
+{{>layouts/header}}
+
+<h2>"{{keyword}}"에 대한 검색 결과</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Title</th>
+        <th scope="col">Content</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#searchList}}
+        <tr>
+            <th>{{id}}</th>
+            <td><a href="/articles/{{id}}">{{title}}</a></td>
+            <td>{{content}}</td>
+        </tr>
+    {{/searchList}}
+    {{^searchList}}
+        <tr>
+            <td colspan="3" class="text-center text-danger">검색 결과가 없습니다.</td>
+        </tr>
+    {{/searchList}}
+    </tbody>
+</table>
+
+{{>layouts/footer}}

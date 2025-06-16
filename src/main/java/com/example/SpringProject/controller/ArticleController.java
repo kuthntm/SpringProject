@@ -4,6 +4,7 @@ import com.example.SpringProject.dto.ArticleForm;
 import com.example.SpringProject.dto.CommentDto;
 import com.example.SpringProject.entity.Article;
 import com.example.SpringProject.repository.ArticleRepository;
+import com.example.SpringProject.service.ArticleService;
 import com.example.SpringProject.service.CommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ import java.util.List;
 public class ArticleController {
     @Autowired // 스프링 부트가 미리 생성해 놓은 리파지터리 객체 주입
     private ArticleRepository articleRepository;
+    @Autowired
+    private ArticleService articleService;
     @Autowired
     private CommentService commentService;
     @GetMapping("/articles/new")
@@ -108,5 +111,13 @@ public class ArticleController {
         }
         // 3. 결과 페이지로 리다이렉트하기
         return "redirect:/articles";
+    }
+
+    @GetMapping("/articles/search")
+    public String search(String keyword, Model model){
+        List<Article> searchList = articleService.search(keyword);
+        model.addAttribute("searchList", searchList);
+        model.addAttribute("keyword", keyword);
+        return "articles/search";
     }
 }

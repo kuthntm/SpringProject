@@ -78,4 +78,10 @@ public class ArticleService {
         // 4. 결과 값 반환하기
         return articleList;
     }
+
+    @Transactional
+    public List<Article> search(String keyword){
+        List<Article> articleList = articleRepository.findByTitleContaining(keyword);
+        return articleList;
+    }
 }
